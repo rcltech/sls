@@ -68,7 +68,6 @@ def sendData(x):
     print(res.text)
     print("Hello world")
 
-
 def main():
     do_connect()
     url, magic = getMagic()
