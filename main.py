@@ -66,6 +66,7 @@ def sendData(x):
     print(x)
     res = urequests.post('http://chisunsls.azurewebsites.net/api/laundry_status', json=x, headers={'Content-Type': 'application/json'})
     print(res.text)
+    print("master")
 
 
 def main():
