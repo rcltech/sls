@@ -82,6 +82,5 @@ def main():
             }
             sendData(data)
             t = time()
-    
 
 main()
