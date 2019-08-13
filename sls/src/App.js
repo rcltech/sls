@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
+import 'typeface-roboto';
+import {Container} from '@material-ui/core';
 import './App.css';
+import withWasherStatus from './Root.js'
 
-function App() {
+function App({data}) {
+  console.log(data);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container className="App-header">
+        <div>
+          <img className="logo" src="RCTECH-logo_chubby.png" alt="RCTECH-logo_chubby"/>
+        </div>
+        <div className="header-text">
+          Smart Laundry System
+        </div>
+
+      </Container>
+
+      <Container className="App-body">
+
+      </Container>
     </div>
   );
 }
 
-export default App;
+export default withWasherStatus(App);
