@@ -7,7 +7,7 @@ import unavailable from '../images/unavailable.png';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        padding: theme.spacing(3, 2),
+        padding: theme.spacing(0.5, 2),
     },
 }));
 
@@ -15,15 +15,15 @@ const Washer = ({status}) => {
     const classes = useStyles();
     if(status === 1){
         return(
-            <Paper className={classes.root}>
+            <div className={classes.root}>
                 <img src={available} alt="Washer" />
-            </Paper>
+            </div>
         );
     }
     return(
-        <Paper className={classes.root}>
+        <div className={classes.root}>
             <img src={unavailable} alt="Washer" />
-        </Paper>
+        </div>
     );
 };
 

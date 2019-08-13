@@ -1,6 +1,6 @@
 import React from 'react';
 import 'typeface-roboto';
-import {Container} from '@material-ui/core';
+import {Container, Grid} from '@material-ui/core';
 import './App.css';
 import withWasherStatus from './Root.js';
 import {map} from 'lodash';
@@ -8,7 +8,9 @@ import Washer from './components/Washer.js'
 
 const createWashers = (data) => (
     map(data, (value, key) => (
-        <Washer key={key} status={value}/>
+        <div className="item">
+          <Washer key={key} status={value}/>
+        </div>
     ))
 );
 
@@ -25,9 +27,11 @@ function App({data}) {
         </div>
 
       </Container>
-        {createWashers(data)}
-      <Container className="App-body">
 
+      <Container className="App-body">
+        <div className="container">
+          {createWashers(data)}
+        </div>
       </Container>
     </div>
   );
