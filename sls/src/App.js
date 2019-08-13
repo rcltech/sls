@@ -1,6 +1,6 @@
 import React from 'react';
 import 'typeface-roboto';
-import {Container, Grid} from '@material-ui/core';
+import {Container} from '@material-ui/core';
 import './App.css';
 import withWasherStatus from './Root.js';
 import {map} from 'lodash';
@@ -15,7 +15,6 @@ const createWashers = (data) => (
 );
 
 function App({data}) {
-  console.log(data);
   return (
     <div className="App">
       <Container className="App-header">

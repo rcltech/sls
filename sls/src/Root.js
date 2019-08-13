@@ -3,19 +3,22 @@ import axios from 'axios'
 const firebase_url = 'https://us-central1-rcsls-2018.cloudfunctions.net/getWasherStatus';
 
 function withWasherStatus(WrappedComponent) {
+
   return class extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        data: {}
+        data: {data:{1:0, 2:0, 3:0, 4:0}}
       };
     }
 
-    async componentDidMount() {
-      const data = await axios.get(firebase_url);
-      this.setState({
-        data
-      })
+    componentDidMount() {
+      setInterval(async() => {
+        const data = await axios.get(firebase_url);
+        this.setState({
+          data
+        })
+      }, 5000);
     }
 
     render() {
