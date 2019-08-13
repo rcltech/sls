@@ -1,6 +1,12 @@
+import os
+import sys
+import uos
+import network
+import machine
 import urequests
 import ujson
 from machine import ADC
+from machine import Pin
 from utime import time
 from utime import sleep
 
@@ -62,25 +68,27 @@ def connectWithMagic(url, magic):
         print("The device was already logged in. Therefore, there was no URL")
 
 
-def sendData(x):
-    print(x)
-    res = urequests.post('http://chisunsls.azurewebsites.net/api/laundry_status', json=x, headers={'Content-Type': 'application/json'})
+def sendData(washer_data):
+    print(washer_data)
+    res = urequests.post('https://m3q6ssas8g.execute-api.us-east-2.amazonaws.com/default/sls', json=washer_data,  headers={'Accept': 'application/json', 'Content-Type': 'application/json', 'x-api-key': "<PUT_API_KEY>"})
     print(res.text)
-    print("Hello world")
 
-def main():
+
+def main():     
     do_connect()
     url, magic = getMagic()
     connectWithMagic(url, magic)
-
     adc = ADC(0)
-    t = time()
-    while(True):
-        if time() - t > 3:
-            data = {
-                "status": adc.read()
-            }
-            sendData(data)
-            t = time()
+    p0 = Pin(0, Pin.IN, machine.Pin.PULL_UP)
+    washer_data = {
+        "washer1": 0,
+        "washer2": 0,
+        "washer3": 0,
+        "washer4": 0
+    }
+    while True:
+        if p0.value() == 0:
+            washer_data['washer1'] = 1 - washer_data['washer1']
+            sendData(washer_data)
 
 main()
