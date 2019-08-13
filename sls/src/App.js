@@ -2,7 +2,18 @@ import React from 'react';
 import 'typeface-roboto';
 import {Container} from '@material-ui/core';
 import './App.css';
-import withWasherStatus from './Root.js'
+import withWasherStatus from './Root.js';
+import lodash from 'lodash';
+import Washer from './components/Washer.js'
+
+const createWashers = (data) => {
+  const washers = lodash.map(data, (value, key) => {
+    return (
+      <Washer key={key} status={value}/>
+    )
+  })
+  return washers;
+}
 
 function App({data}) {
   console.log(data);
@@ -17,7 +28,7 @@ function App({data}) {
         </div>
 
       </Container>
-
+        {createWashers(data)}
       <Container className="App-body">
 
       </Container>
