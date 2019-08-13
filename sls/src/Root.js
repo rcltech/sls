@@ -8,17 +8,22 @@ function withWasherStatus(WrappedComponent) {
     constructor(props) {
       super(props);
       this.state = {
-        data: {data:{1:0, 2:0, 3:0, 4:0}}
+        data: {data:{1:-1, 2:-1, 3:-1, 4:-1}}
       };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+      const data = await axios.get(firebase_url);
+      this.setState({
+        data
+      });
+
       setInterval(async() => {
         const data = await axios.get(firebase_url);
         this.setState({
           data
         })
-      }, 5000);
+      }, 20000);
     }
 
     render() {

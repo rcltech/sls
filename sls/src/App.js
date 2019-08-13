@@ -5,6 +5,7 @@ import './App.css';
 import withWasherStatus from './Root.js';
 import {map} from 'lodash';
 import Washer from './components/Washer.js'
+import logo from './images/logo.png';
 
 const createWashers = (data) => (
     map(data, (value, key) => (
@@ -19,7 +20,7 @@ function App({data}) {
     <div className="App">
       <Container className="App-header">
         <div>
-          <img className="logo" src="RCTECH-logo_chubby.png" alt="RCTECH-logo_chubby"/>
+          <img className="logo" src={logo} alt="RCTECH"/>
         </div>
         <div className="header-text">
           Smart Laundry System
