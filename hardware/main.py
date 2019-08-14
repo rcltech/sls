@@ -74,9 +74,7 @@ def connect_open_wifi():
     url, magic = getMagic()
     connectWithMagic(url, magic)
 
-def sendData(washer_data):
-    f = open('API_KEY.txt')
-    API_KEY = f.read()
+def sendData(washer_data, API_KEY):
     aws_url = 'https://m3q6ssas8g.execute-api.us-east-2.amazonaws.com/default/sls'
     headers = {
         'Accept': 'application/json',
@@ -90,11 +88,16 @@ def sendData(washer_data):
     except:
         print("There was an exception, trying again")
         connect_open_wifi()
-        sendData(washer_data)
+        sendData(washer_data, API_KEY)
 
 def main():     
     connect_open_wifi()
+    f = open('API_KEY.txt')
+    API_KEY = f.read()
     p0 = Pin(0, Pin.IN, machine.Pin.PULL_UP)
+    p1 = Pin(4, Pin.IN, machine.Pin.PULL_UP)
+    p2 = Pin(5, Pin.IN, machine.Pin.PULL_UP)
+    p3 = Pin(2, Pin.IN, machine.Pin.PULL_UP)
     washer_data = {
         "washer1": 0,
         "washer2": 0,
@@ -104,6 +107,15 @@ def main():
     while True:
         if p0.value() == 0:
             washer_data['washer1'] = 1 - washer_data['washer1']
-            sendData(washer_data)
+            sendData(washer_data, API_KEY)
+        if p1.value() == 0:
+            washer_data['washer2'] = 1 - washer_data['washer2']
+            sendData(washer_data, API_KEY)
+        if p2.value() == 0:
+            washer_data['washer3'] = 1 - washer_data['washer3']
+            sendData(washer_data, API_KEY)
+        if p3.value() == 0:
+            washer_data['washer4'] = 1 - washer_data['washer4']
+            sendData(washer_data, API_KEY)
 
 main()
