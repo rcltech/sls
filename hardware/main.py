@@ -68,17 +68,32 @@ def connectWithMagic(url, magic):
         print("The device was already logged in. Therefore, there was no URL")
 
 
-def sendData(washer_data):
-    print(washer_data)
-    res = urequests.post('https://m3q6ssas8g.execute-api.us-east-2.amazonaws.com/default/sls', json=washer_data,  headers={'Accept': 'application/json', 'Content-Type': 'application/json', 'x-api-key': "<PUT_API_KEY>"})
-    print(res.text)
 
-
-def main():     
+def connect_open_wifi():
     do_connect()
     url, magic = getMagic()
     connectWithMagic(url, magic)
-    adc = ADC(0)
+
+def sendData(washer_data):
+    f = open('API_KEY.txt')
+    API_KEY = f.read()
+    aws_url = 'https://m3q6ssas8g.execute-api.us-east-2.amazonaws.com/default/sls'
+    headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-api-key': API_KEY
+    }
+    try:
+        print(washer_data)
+        res = urequests.post(aws_url,json=washer_data,  headers=headers)
+        print(res.text)
+    except:
+        print("There was an exception, trying again")
+        connect_open_wifi()
+        sendData(washer_data)
+
+def main():     
+    connect_open_wifi()
     p0 = Pin(0, Pin.IN, machine.Pin.PULL_UP)
     washer_data = {
         "washer1": 0,
