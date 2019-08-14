@@ -7,8 +7,24 @@ import urequests
 import ujson
 from machine import ADC
 from machine import Pin
+import utime
 from utime import time
 from utime import sleep
+
+washer_data = {
+    "washer1": 0,
+    "washer2": 0,
+    "washer3": 0,
+    "washer4": 0
+}
+
+f = open('API_KEY.txt')
+API_KEY = f.read()
+
+p0 = Pin(0, Pin.IN, Pin.PULL_UP)
+p1 = Pin(4, Pin.IN, Pin.PULL_UP)
+p2 = Pin(14, Pin.IN, Pin.PULL_UP)
+p3 = Pin(12, Pin.IN, Pin.PULL_UP)
 
 def do_connect():
     sta_if = network.WLAN(network.STA_IF)
@@ -90,32 +106,56 @@ def sendData(washer_data, API_KEY):
         connect_open_wifi()
         sendData(washer_data, API_KEY)
 
+last_val_change = utime.ticks_ms()
+
+def washer1(args):
+    global last_val_change
+    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
+    if diff > 1000:
+        print(diff)
+        last_val_change = utime.ticks_ms()
+        washer_data['washer1'] = 1 - washer_data['washer1']
+        sendData(washer_data, API_KEY)
+        last_val_change = utime.ticks_ms()
+
+def washer2(args):
+    global last_val_change
+    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
+    if diff > 1000:
+        print(diff)
+        last_val_change = utime.ticks_ms()
+        washer_data['washer2'] = 1 - washer_data['washer2']
+        sendData(washer_data, API_KEY)
+        last_val_change = utime.ticks_ms()
+
+
+def washer3(args):
+    global last_val_change
+    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
+    if diff > 1000:
+        print(diff)
+        last_val_change = utime.ticks_ms()
+        washer_data['washer3'] = 1 - washer_data['washer3']
+        sendData(washer_data, API_KEY)
+        last_val_change = utime.ticks_ms()
+
+
+def washer4(args):
+    global last_val_change
+    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
+    if diff > 1000:
+        print(diff)
+        last_val_change = utime.ticks_ms()
+        washer_data['washer4'] = 1 - washer_data['washer4']
+        sendData(washer_data, API_KEY)
+        last_val_change = utime.ticks_ms()
+
+    
 def main():     
     connect_open_wifi()
-    f = open('API_KEY.txt')
-    API_KEY = f.read()
-    p0 = Pin(0, Pin.IN, machine.Pin.PULL_UP)
-    p1 = Pin(4, Pin.IN, machine.Pin.PULL_UP)
-    p2 = Pin(5, Pin.IN, machine.Pin.PULL_UP)
-    p3 = Pin(2, Pin.IN, machine.Pin.PULL_UP)
-    washer_data = {
-        "washer1": 0,
-        "washer2": 0,
-        "washer3": 0,
-        "washer4": 0
-    }
-    while True:
-        if p0.value() == 0:
-            washer_data['washer1'] = 1 - washer_data['washer1']
-            sendData(washer_data, API_KEY)
-        if p1.value() == 0:
-            washer_data['washer2'] = 1 - washer_data['washer2']
-            sendData(washer_data, API_KEY)
-        if p2.value() == 0:
-            washer_data['washer3'] = 1 - washer_data['washer3']
-            sendData(washer_data, API_KEY)
-        if p3.value() == 0:
-            washer_data['washer4'] = 1 - washer_data['washer4']
-            sendData(washer_data, API_KEY)
+    p0.irq(trigger=Pin.IRQ_FALLING, handler=washer1)
+    p1.irq(trigger=Pin.IRQ_FALLING, handler=washer2)
+    p2.irq(trigger=Pin.IRQ_FALLING, handler=washer3)
+    p3.irq(trigger=Pin.IRQ_FALLING, handler=washer4)
 
 main()
