@@ -1,10 +1,12 @@
 import React from 'react';
 import 'typeface-roboto';
 import {Container} from '@material-ui/core';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import withWasherStatus from './Root.js';
 import {map} from 'lodash';
-import Washer from './components/Washer.js'
+import Washer from './components/Washer.js';
+import Help from './components/Help.js';
 import logo from './images/logo.png';
 
 const createWashers = (data) => (
@@ -32,6 +34,9 @@ function App({data}) {
         <div className="container">
           {createWashers(data)}
         </div>
+
+        <Help/>
+
       </Container>
     </div>
   );
