@@ -4,6 +4,9 @@ import {Container} from '@material-ui/core';
 import { Button, Collapse, Card, CardBody } from 'reactstrap';
 
 const styles = {
+  container: {
+    margin: '1vh auto',
+  },
   button: {
     fontSize: '1em',
     marginBottom: '15px',
@@ -26,7 +29,7 @@ class Help extends React.Component {
 
   render() {
     return (
-      <Container className="help">
+      <Container className="help" style={styles.container}>
         <Button color='info' style={styles.button} onClick={this.toggle}>Help</Button>
         <Collapse isOpen={this.state.collapse}>
           <Card>
