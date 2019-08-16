@@ -1,7 +1,7 @@
 # React Web Application
 
 ### Development
-Clone this repo, and navigate to this directory. Start the devlopement server.
+Clone this repository, and navigate to this directory. Start the development server.
 ```
 npm start
 ```
