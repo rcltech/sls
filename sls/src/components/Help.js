@@ -1,4 +1,6 @@
 import React from 'react';
+import Icons from './Icons';
+import Demo from './Demo';
 import 'typeface-roboto';
 import {Container} from '@material-ui/core';
 import { Button, Collapse, Card, CardBody } from 'reactstrap';
@@ -34,7 +36,8 @@ class Help extends React.Component {
         <Collapse isOpen={this.state.collapse}>
           <Card>
             <CardBody styles={styles.body}>
-              Coming Soon.
+              <Icons />
+              <Demo />
             </CardBody>
           </Card>
         </Collapse>
