@@ -18,12 +18,12 @@ function withWasherStatus(WrappedComponent) {
         data
       });
 
-      setInterval(async() => {
-        const data = await axios.get(firebase_url);
-        this.setState({
-          data
-        })
-      }, 20000);
+      // setInterval(async() => {
+      //   const data = await axios.get(firebase_url);
+      //   this.setState({
+      //     data
+      //   })
+      // }, 20000);
     }
 
     render() {
