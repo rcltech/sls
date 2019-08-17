@@ -7,6 +7,7 @@ import withWasherStatus from './Root.js';
 import {map} from 'lodash';
 import Washer from './components/Washer.js';
 import Help from './components/Help.js';
+import Contact from './components/Contact.js';
 import logo from './images/logo.png';
 
 const createWashers = (data) => (
@@ -35,7 +36,10 @@ function App({data}) {
           {createWashers(data)}
         </div>
 
-        <Help/>
+        <div className="info-section">
+          <Help/>
+          <Contact/>
+        </div>
 
       </Container>
     </div>
