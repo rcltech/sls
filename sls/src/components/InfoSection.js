@@ -25,24 +25,19 @@ const styles = {
 }
 
 class InfoSection extends React.Component {
-  constructor(props) {
-    super(props);
-    this.toggleHelp = this.toggleHelp.bind(this);
-    this.toggleContact = this.toggleContact.bind(this);
-    this.state = {
-      helpCollapse: false,
-      contactCollapse: false
-    };
+  state = {
+    helpCollapse: false,
+    contactCollapse: false,
   }
 
-  toggleHelp() {
+  toggleHelp = () => {
     this.setState(state => ({
       helpCollapse: !state.helpCollapse,
       contactCollapse: false,
     }));
   }
 
-  toggleContact() {
+  toggleContact = () => {
     this.setState(state => ({
       contactCollapse: !state.contactCollapse,
       helpCollapse: false,

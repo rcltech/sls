@@ -35,7 +35,7 @@ function App({data}) {
           {createWashers(data)}
         </div>
 
-        <InfoSection className="info-section"/>
+        <InfoSection />
 
       </Container>
     </div>
