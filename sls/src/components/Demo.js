@@ -3,7 +3,7 @@ import WasherDemo from './WasherDemo';
 
 const style = {
     titleStyle : {
-        fontSize : 'min(40px,8vw)',
+        fontSize : '5vw',
         marginTop : '5vh'
     }
 }

@@ -6,7 +6,7 @@ const style = {
         border : '1px solid #eee'
     },
     image : {
-        width : 'min(400px,80vw)',
+        width : '70%',
     }
 }
 class WasherCard extends React.Component{

@@ -9,7 +9,7 @@ const style = {
         display : 'block'
     },
     image : {
-        width : 'min(400px,80vw)'
+        width : '70%'
     }
 }
 
