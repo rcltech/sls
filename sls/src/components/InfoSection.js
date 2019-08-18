@@ -1,7 +1,7 @@
 import React from 'react';
 import 'typeface-roboto';
-import {Container} from '@material-ui/core';
-import { Button, Collapse, Card, CardBody } from 'reactstrap';
+import { Container } from '@material-ui/core';
+import { Button } from 'reactstrap';
 import Help from './Help.js';
 import Contact from './Contact.js';
 
