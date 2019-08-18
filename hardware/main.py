@@ -22,9 +22,19 @@ f = open('API_KEY.txt')
 API_KEY = f.read()
 
 p0 = Pin(0, Pin.IN, Pin.PULL_UP)
-p1 = Pin(4, Pin.IN, Pin.PULL_UP)
-p2 = Pin(14, Pin.IN, Pin.PULL_UP)
-p3 = Pin(12, Pin.IN, Pin.PULL_UP)
+p1 = Pin(2, Pin.IN, Pin.PULL_UP)
+p2 = Pin(4, Pin.IN, Pin.PULL_UP)
+p3 = Pin(5, Pin.IN, Pin.PULL_UP)
+
+led0 = Pin(14, Pin.OUT)
+led1 = Pin(12, Pin.OUT)
+led2 = Pin(13, Pin.OUT)
+led3 = Pin(15, Pin.OUT)    
+
+led0.value(0)
+led1.value(0)
+led2.value(0)
+led3.value(0)
 
 def do_connect():
     sta_if = network.WLAN(network.STA_IF)
@@ -98,6 +108,7 @@ def sendData(washer_data, API_KEY):
         'x-api-key': API_KEY
     }
     try:
+        setLEDStates()
         print(washer_data)
         res = urequests.post(aws_url,json=washer_data,  headers=headers)
         print(res.text)
@@ -150,7 +161,12 @@ def washer4(args):
         sendData(washer_data, API_KEY)
         last_val_change = utime.ticks_ms()
 
-    
+def setLEDStates():
+    led0.value(washer_data["washer1"])
+    led1.value(washer_data["washer2"])
+    led2.value(washer_data["washer3"])
+    led3.value(washer_data["washer4"])
+
 def main():     
     connect_open_wifi()
     p0.irq(trigger=Pin.IRQ_FALLING, handler=washer1)
