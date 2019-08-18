@@ -18,7 +18,7 @@ const style = {
         justifyContent : 'space-evenly',
     },
     titleStyle : {
-        fontSize : '5vw'
+        fontSize : '1em'
     }
 }
 
