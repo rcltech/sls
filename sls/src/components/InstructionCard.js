@@ -18,17 +18,17 @@ const style = {
       justifyContent: 'center',
       fontSize: '1em',
     }
-}
+};
 
 class InstructionCard extends React.Component{
     render(){
+        const {image, description} = this.props;
         return(
             <div style={style.container}>
-                <img src={this.props.image} alt='instruction' style={style.image}/>
-                <p style={style.text}>{this.props.description}</p>
+                <img src={image} alt='instruction' style={style.image}/>
+                <p style={style.text}>{description}</p>
             </div>
         );
-
     }
 }
 

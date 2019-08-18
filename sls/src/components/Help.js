@@ -6,10 +6,11 @@ import { Collapse, Card, CardBody } from 'reactstrap';
 
 class Help extends React.Component {
   render() {
+      const {collapse, collapseStyles, textBodyStyles} = this.props;
     return (
-        <Collapse isOpen={this.props.collapse} style={this.props.collapseStyles}>
+        <Collapse isOpen={collapse} style={collapseStyles}>
           <Card>
-            <CardBody style={this.props.textBodyStyles}>
+            <CardBody style={textBodyStyles}>
               <Icons />
               <Instructions/>
             </CardBody>
