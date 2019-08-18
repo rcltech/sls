@@ -15,7 +15,8 @@ class Help extends React.Component {
         <Collapse isOpen={this.props.collapse} style={this.props.collapseStyles}>
           <Card>
             <CardBody style={this.props.textBodyStyles}>
-              Coming Soon.
+              <Icons />
+              <Demo />
             </CardBody>
           </Card>
         </Collapse>

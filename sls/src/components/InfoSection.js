@@ -36,11 +36,17 @@ class InfoSection extends React.Component {
   }
 
   toggleHelp() {
-    this.setState(state => ({ helpCollapse: !state.helpCollapse }));
+    this.setState(state => ({
+      helpCollapse: !state.helpCollapse,
+      contactCollapse: false,
+    }));
   }
 
   toggleContact() {
-    this.setState(state => ({ contactCollapse: !state.contactCollapse }));
+    this.setState(state => ({
+      contactCollapse: !state.contactCollapse,
+      helpCollapse: false,
+    }));
   }
 
   render() {
