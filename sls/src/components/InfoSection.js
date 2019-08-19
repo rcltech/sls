@@ -2,8 +2,9 @@ import React from 'react';
 import 'typeface-roboto';
 import { Container } from '@material-ui/core';
 import { Button } from 'reactstrap';
-import Help from './Help.js';
-import Contact from './Contact.js';
+import Help from './Help';
+import Contact from './Contact';
+import About from './About';
 
 const styles = {
   container: {
@@ -28,32 +29,46 @@ class InfoSection extends React.Component {
   state = {
     helpCollapse: false,
     contactCollapse: false,
+    aboutCollapse: false
   };
 
   toggleHelp = () => {
     this.setState(state => ({
       helpCollapse: !state.helpCollapse,
       contactCollapse: false,
+      aboutCollapse: false
     }));
   };
 
   toggleContact = () => {
     this.setState(state => ({
-      contactCollapse: !state.contactCollapse,
       helpCollapse: false,
+      contactCollapse: !state.contactCollapse,
+      aboutCollapse: false
     }));
   };
 
+  toggleAbout = () => {
+    this.setState(state => ({
+      helpCollapse: false,
+      contactCollapse: false,
+      aboutCollapse: !state.aboutCollapse
+    }))
+  }
+
+
   render() {
-    const {helpCollapse, contactCollapse} = this.state;
+    const {helpCollapse, contactCollapse, aboutCollapse} = this.state;
     return (
       <Container style={styles.container}>
         <div style={styles.buttonContainer}>
           <Button color='info' style={styles.button} onClick={this.toggleHelp}>Help</Button>
           <Button color='warning' style={styles.button} onClick={this.toggleContact}>Report</Button>
+          <Button color='success' style={styles.button} onClick={this.toggleAbout}>About</Button>
         </div>
         <Help collapse={helpCollapse} collapseStyles={styles.collapseStyles} textBodyStyles={styles.textBody}/>
         <Contact collapse={contactCollapse} collapseStyles={styles.collapseStyles} textBodyStyles={styles.textBody}/>
+        <About collapse={aboutCollapse} collapseStyles={styles.collapseStyles} textBodyStyles={styles.textBody}/>
       </Container>
     )
   }
