@@ -3,7 +3,7 @@ import React from 'react';
 const style = {
     container : {
         display : 'grid',
-        gridTemplateColumns : '50% 50%',
+        gridTemplateColumns : '30% 70%',
         margin : '20px 0',
         padding : '10px',
         border : '0.5px solid #eee',
