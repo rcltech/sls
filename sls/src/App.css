@@ -44,3 +44,18 @@
   max-width: 100%;
   overflow: hidden;
 }
+
+/* offline */
+.offline-container {
+  margin: 2vh 3vh;
+}
+
+.offline-cat {
+  max-height: calc(180px + 5vmin);
+  margin: 2vh auto;
+  border-radius: 10px;
+}
+
+.offline-text {
+  font-size: 1em,
+}
