@@ -2,6 +2,7 @@ import React from 'react';
 import 'typeface-roboto';
 import {Collapse, Card, CardBody } from 'reactstrap';
 import Members from './Members';
+import ProductDescription from './ProductDescription';
 
 class About extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class About extends React.Component {
         <Collapse isOpen={collapse} style={collapseStyles}>
           <Card>
             <CardBody style={textBodyStyles}>
+                <ProductDescription/>
                 <Members/>
             </CardBody>
           </Card>
