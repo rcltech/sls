@@ -7,10 +7,11 @@ const style = {
         border : '1px solid #eee',
         borderRadius: '5px',
         display: 'inline-flex',
+        width: '100%',
     },
     image : {
         borderRadius: '4px',
-        height : '15vmax',
+        height : 'calc(105px + 3vmin)',
         margin: 'auto 5px',
     },
     text: {
