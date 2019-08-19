@@ -1,10 +1,6 @@
 import React from 'react';
 
-const description = "The Smart Laundry System aims to help all R.C. Lee residents in tracking the availability of washers in the hall.\
-                      Quiet often when we are about to do our laundry, we need to go back and forth to the laundry room on the 16th floor to check \
-                      if there is a washer which is not being used. Therefore, RC Tech Club came out with a simple solution to tackle this issue. \
-                      By integrating a simple button to each washer and connect them to this website, now everybody can always check the status of each washer, anytime, anywhere. \
-                      Our product development team always seeks for improvement, feel free to leave any comments or suggestions in the 'Report' section."
+const description = "The Smart Laundry System aims to help R.C. Lee hall residents by tracking the availability of laundry machines. Quite often when we are about to do our laundry, we find all of the machines are being used. So, RC Tech Club has come out with a simple solution to tackle this issue. By integrating a simple button to each washer and connect them to this website, now everybody can check the status of each washer, anytime, anywhere. As our product development team always seeks for improvement, you are welcomed to leave any comments or suggestions by sending us an email in the 'Report' section."
 
 const style = {
     container : {
@@ -17,7 +13,8 @@ const style = {
     descriptionStyle : {
         padding : '10px',
         border : '0.5px solid #eee',
-        borderRadius : '5px'
+        borderRadius : '5px',
+        fontSize: '1em',
     }
 }
 

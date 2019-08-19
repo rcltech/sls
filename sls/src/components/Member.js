@@ -32,7 +32,7 @@ class Member extends React.Component{
         const { data } = this.props;
         return (
             <div style={style.container}>
-                <img src={data.image} alt='member photo' style={style.image}/>
+                <img src={data.image} alt='member' style={style.image}/>
                 <div style={style.text}>
                   <div style={style.name}>
                     {data.name}
