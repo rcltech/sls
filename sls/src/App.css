@@ -3,6 +3,8 @@
 .App {
   text-align: center;
   font-family: 'Quicksand', sans-serif;
+  max-width: 850px;
+  margin: auto;
 }
 
 .App-header {

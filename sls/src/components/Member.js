@@ -7,19 +7,23 @@ const style = {
         margin : '20px 0',
         padding : '10px',
         border : '0.5px solid #eee',
-        borderRadius : '20px'
+        borderRadius : '5px'
     },
     image : {
         borderRadius : '50%',
-        width : '100%'
+        maxHeight : 'calc(105px + 3vmin)',
+        maxWidth: '100%',
+        margin: 'auto'
     },
     text : {
         textAlign : 'left',
-        padding : '5px 0 0 20px',
-        fontSize : '3vw'
+        fontSize : '1em',
+        display: 'block',
+        justifyContent: 'center',
+        margin: 'auto 10px',
     },
-    p : {
-        margin : 0
+    name: {
+      fontWeight: '800',
     }
 }
 
@@ -28,10 +32,14 @@ class Member extends React.Component{
         const { data } = this.props;
         return (
             <div style={style.container}>
-                <img src={data.image} alt='member' style={style.image}/>
+                <img src={data.image} alt='member photo' style={style.image}/>
                 <div style={style.text}>
-                    <p style={style.p}><b>{data.name}</b></p>
-                    <p style={style.p}>{data.role}</p>
+                  <div style={style.name}>
+                    {data.name}
+                  </div>
+                  <div>
+                    {data.role}
+                  </div>
                 </div>
             </div>
         );

@@ -11,6 +11,9 @@ import welvin from '../images/team-members/welvin.png';
 const style = {
     container : {
         width : 'min(80vw,400px)'
+    },
+    titleStyle : {
+        fontSize : '1.5em'
     }
 }
 
@@ -18,17 +21,12 @@ const data = {
     utkarsh : {
         name : 'Utkarsh Goel',
         image : utkarsh,
-        role : 'Hardware engineer & Full-stack developer'
+        role : 'Electronics engineer & Full-stack developer'
     },
     sean : {
         name : 'Sean Chok',
         image : sean,
         role : 'Hardware engineer & Front-end developer'
-    },
-    waqas : {
-        name : 'Waqas Ali',
-        image : waqas,
-        role : 'Back-end developer'
     },
     welvin : {
         name : 'Welvin Bun',
@@ -44,7 +42,12 @@ const data = {
         name : 'Siddhant Bagri',
         image : sid,
         role : 'Designer'
-    }
+    },
+    waqas : {
+        name : 'Waqas Ali',
+        image : waqas,
+        role : 'External contributor'
+    },
 }
 
 const createMember = (data) => (
@@ -57,7 +60,7 @@ class Members extends React.Component{
     render(){
         return(
             <div style={style.container}>
-                <h3>Our Team</h3>
+                <h1 style={style.titleStyle}>Our Team</h1>
                 {createMember(data)}
             </div>
         );
