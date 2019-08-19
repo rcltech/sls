@@ -9,8 +9,8 @@ const style = {
         display: 'inline-flex',
     },
     image : {
-        width : '30%',
-        height : '20vmax',
+        borderRadius: '4px',
+        height : '15vmax',
         margin: 'auto 5px',
     },
     text: {
