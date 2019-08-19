@@ -11,11 +11,15 @@ const styles = {
     margin: '1vh auto',
   },
   buttonContainer: {
+    maxWidth: '350px',
+    margin: 'auto',
     marginBottom: '15px',
+    display: 'flex',
+    flexWrap: 'nowrap',
+    justifyContent: 'space-around',
   },
   button: {
     fontSize: '1em',
-    margin: '0 10px',
   },
   collapseStyles: {
     margin: '10px auto',

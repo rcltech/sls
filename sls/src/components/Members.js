@@ -11,6 +11,9 @@ import welvin from '../images/team-members/welvin.png';
 const style = {
     container : {
         width : 'min(80vw,400px)'
+    },
+    titleStyle : {
+        fontSize : '1.5em'
     }
 }
 
@@ -57,7 +60,7 @@ class Members extends React.Component{
     render(){
         return(
             <div style={style.container}>
-                <h3>Our Team</h3>
+                <h1 style={style.titleStyle}>Our Team</h1>
                 {createMember(data)}
             </div>
         );
