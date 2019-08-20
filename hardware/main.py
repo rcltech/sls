@@ -22,19 +22,14 @@ f = open('API_KEY.txt')
 API_KEY = f.read()
 
 p0 = Pin(0, Pin.IN)
-p1 = Pin(2, Pin.IN)
+p1 = Pin(14, Pin.IN)
 p2 = Pin(4, Pin.IN)
 p3 = Pin(5, Pin.IN)
 
-led0 = Pin(14, Pin.OUT)
-led1 = Pin(12, Pin.OUT)
-led2 = Pin(13, Pin.OUT)
-led3 = Pin(15, Pin.OUT)    
-
-led0.value(0)
-led1.value(0)
-led2.value(0)
-led3.value(0)
+p0.value(0)
+p1.value(0)
+p2.value(0)
+p3.value(0)
 
 def do_connect():
     sta_if = network.WLAN(network.STA_IF)
@@ -123,10 +118,10 @@ last_val_change = utime.ticks_ms()
 def updateWasherStatus():
     global last_val_change
     old_washer_data = washer_data.copy()
-    washer_data["washer1"] = 1 - p0.value()
-    washer_data["washer2"] = 1 - p1.value()
-    washer_data["washer3"] = 1 - p2.value()
-    washer_data["washer4"] = 1 - p3.value()
+    washer_data["washer1"] = p0.value()
+    washer_data["washer2"] = p1.value()
+    washer_data["washer3"] = p2.value()
+    washer_data["washer4"] = p3.value()
     if old_washer_data == washer_data:
         return
     sendData()
