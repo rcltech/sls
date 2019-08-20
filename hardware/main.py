@@ -21,10 +21,20 @@ washer_data = {
 f = open('API_KEY.txt')
 API_KEY = f.read()
 
-p0 = Pin(0, Pin.IN, Pin.PULL_UP)
-p1 = Pin(4, Pin.IN, Pin.PULL_UP)
-p2 = Pin(14, Pin.IN, Pin.PULL_UP)
-p3 = Pin(12, Pin.IN, Pin.PULL_UP)
+p0 = Pin(0, Pin.IN)
+p1 = Pin(2, Pin.IN)
+p2 = Pin(4, Pin.IN)
+p3 = Pin(5, Pin.IN)
+
+led0 = Pin(14, Pin.OUT)
+led1 = Pin(12, Pin.OUT)
+led2 = Pin(13, Pin.OUT)
+led3 = Pin(15, Pin.OUT)    
+
+led0.value(0)
+led1.value(0)
+led2.value(0)
+led3.value(0)
 
 def do_connect():
     sta_if = network.WLAN(network.STA_IF)
@@ -90,7 +100,9 @@ def connect_open_wifi():
     url, magic = getMagic()
     connectWithMagic(url, magic)
 
-def sendData(washer_data, API_KEY):
+def sendData():
+    global API_KEY
+    global washer_data
     aws_url = 'https://m3q6ssas8g.execute-api.us-east-2.amazonaws.com/default/sls'
     headers = {
         'Accept': 'application/json',
@@ -104,58 +116,25 @@ def sendData(washer_data, API_KEY):
     except:
         print("There was an exception, trying again")
         connect_open_wifi()
-        sendData(washer_data, API_KEY)
+        sendData()
 
 last_val_change = utime.ticks_ms()
 
-def washer1(args):
+def updateWasherStatus():
     global last_val_change
-    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
-    if diff > 1000:
-        print(diff)
-        last_val_change = utime.ticks_ms()
-        washer_data['washer1'] = 1 - washer_data['washer1']
-        sendData(washer_data, API_KEY)
-        last_val_change = utime.ticks_ms()
+    old_washer_data = washer_data.copy()
+    washer_data["washer1"] = 1 - p0.value()
+    washer_data["washer2"] = 1 - p1.value()
+    washer_data["washer3"] = 1 - p2.value()
+    washer_data["washer4"] = 1 - p3.value()
+    if old_washer_data == washer_data:
+        return
+    sendData()
 
-def washer2(args):
-    global last_val_change
-    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
-    if diff > 1000:
-        print(diff)
-        last_val_change = utime.ticks_ms()
-        washer_data['washer2'] = 1 - washer_data['washer2']
-        sendData(washer_data, API_KEY)
-        last_val_change = utime.ticks_ms()
-
-
-def washer3(args):
-    global last_val_change
-    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
-    if diff > 1000:
-        print(diff)
-        last_val_change = utime.ticks_ms()
-        washer_data['washer3'] = 1 - washer_data['washer3']
-        sendData(washer_data, API_KEY)
-        last_val_change = utime.ticks_ms()
-
-
-def washer4(args):
-    global last_val_change
-    diff = utime.ticks_diff(utime.ticks_ms(), last_val_change)
-    if diff > 1000:
-        print(diff)
-        last_val_change = utime.ticks_ms()
-        washer_data['washer4'] = 1 - washer_data['washer4']
-        sendData(washer_data, API_KEY)
-        last_val_change = utime.ticks_ms()
-
-    
 def main():     
     connect_open_wifi()
-    p0.irq(trigger=Pin.IRQ_FALLING, handler=washer1)
-    p1.irq(trigger=Pin.IRQ_FALLING, handler=washer2)
-    p2.irq(trigger=Pin.IRQ_FALLING, handler=washer3)
-    p3.irq(trigger=Pin.IRQ_FALLING, handler=washer4)
+    while(True):
+        updateWasherStatus()
+        sleep(10)
 
 main()
