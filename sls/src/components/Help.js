@@ -1,6 +1,5 @@
 import React from 'react';
 import Icons from './Icons';
-import Instructions from './Instructions';
 import 'typeface-roboto';
 import { Collapse, Card, CardBody } from 'reactstrap';
 
@@ -12,7 +11,6 @@ class Help extends React.Component {
           <Card>
             <CardBody style={textBodyStyles}>
               <Icons />
-              <Instructions/>
             </CardBody>
           </Card>
         </Collapse>
