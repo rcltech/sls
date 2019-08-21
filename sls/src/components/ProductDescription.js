@@ -1,6 +1,10 @@
 import React from 'react';
 
-const description = "The Smart Laundry System aims to help R.C. Lee hall residents by tracking the availability of laundry machines. Quite often when we are about to do our laundry, we find all of the machines are being used. So, RC Tech Club has come out with a simple solution to tackle this issue. By integrating a simple button to each washer and connect them to this website, now everybody can check the status of each washer, anytime, anywhere. As our product development team always seeks for improvement, you are welcomed to leave any comments or suggestions by sending us an email in the 'Report' section."
+const github_url = "github.com/rcltech/sls";
+
+const description = <div><p>The Smart Laundry System aims to help R.C. Lee hall residents by tracking the availability of laundry machines. Quite often when we are about to do our laundry, we find all of the machines are being used. So, RC Tech Club has come out with a simple solution to tackle this issue. We have integrated light sensors that would detect the status of each washer, and connected them to this website. Now everyone can easily find out if there's an available washer when they want to do laundry. </p><p>As our product development team always seeks for improvement, you are welcomed to leave any comments or suggestions by sending us an email in the 'Report' section. For those who are interested in building a similar system, checkout our <a href={github_url}>github project</a>.</p></div>
+
+
 
 const style = {
     container : {
