@@ -1,43 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4e9bdf62cf33fb308843ac0937815c84",
+    "revision": "7e5daaa69bf5471133a3e8d9ce78919c",
     "url": "/sls/index.html"
   },
   {
-    "revision": "05b0e9c03679263deb37",
+    "revision": "01278e593f98ace0f360",
     "url": "/sls/static/css/2.8695840c.chunk.css"
   },
   {
-    "revision": "8fdf4d90fd3f835da05f",
-    "url": "/sls/static/css/main.2e4703b7.chunk.css"
+    "revision": "3034346be668c2173fca",
+    "url": "/sls/static/css/main.a33cd4b9.chunk.css"
   },
   {
-    "revision": "05b0e9c03679263deb37",
-    "url": "/sls/static/js/2.74a397b7.chunk.js"
+    "revision": "01278e593f98ace0f360",
+    "url": "/sls/static/js/2.f7c5bbb8.chunk.js"
   },
   {
-    "revision": "8fdf4d90fd3f835da05f",
-    "url": "/sls/static/js/main.d2425380.chunk.js"
+    "revision": "3034346be668c2173fca",
+    "url": "/sls/static/js/main.c84f94ea.chunk.js"
   },
   {
     "revision": "ce914a9759e6b315c3e6",
     "url": "/sls/static/js/runtime~main.ffc78060.js"
-  },
-  {
-    "revision": "86e1d2b68d724df65721fb777d50df1b",
-    "url": "/sls/static/media/LED_off.86e1d2b6.png"
-  },
-  {
-    "revision": "a2cc5574c9c10652e36023979fdf5a21",
-    "url": "/sls/static/media/LED_off_pressed.a2cc5574.png"
-  },
-  {
-    "revision": "af419840d06cd3ae1af40e8314fc6269",
-    "url": "/sls/static/media/LED_on.af419840.png"
-  },
-  {
-    "revision": "9c135189ef6993d46253a7da72669b3a",
-    "url": "/sls/static/media/LED_on_pressed.9c135189.png"
   },
   {
     "revision": "000429b6a1f9a5f00673d648e9a52160",
@@ -46,6 +30,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "14e814f697cc51752afaff5f9e3fcbd4",
     "url": "/sls/static/media/base.14e814f6.png"
+  },
+  {
+    "revision": "89e9a600c88142460be2f271fea1556a",
+    "url": "/sls/static/media/gela.89e9a600.png"
   },
   {
     "revision": "83c070978ca8c25b115cc2b20c76c5d4",
@@ -148,7 +136,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/sls/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   {
+    "revision": "0a44399a835274eb77b2bd00334ef69e",
+    "url": "/sls/static/media/sean.0a44399a.png"
+  },
+  {
+    "revision": "c4231d8c89ffc81e1fa8075e03555898",
+    "url": "/sls/static/media/sid.c4231d8c.png"
+  },
+  {
     "revision": "d34a13c152c38b1bb867bafd06a814cf",
     "url": "/sls/static/media/unavailable.d34a13c1.png"
+  },
+  {
+    "revision": "96b40aecdb9cc612038c1cf1c1729593",
+    "url": "/sls/static/media/utkarsh.96b40aec.png"
+  },
+  {
+    "revision": "4eda934a8848b0e01f81c41c24beafa8",
+    "url": "/sls/static/media/waqas.4eda934a.png"
+  },
+  {
+    "revision": "6cc6bc96b9dea7d68f7101210aac6c40",
+    "url": "/sls/static/media/welvin.6cc6bc96.png"
   }
 ]);
