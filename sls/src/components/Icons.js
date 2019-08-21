@@ -26,7 +26,7 @@ class Icons extends React.Component {
     render(){
         return (
             <div style = {style.iconsStyle}>
-                <h1 style={style.titleStyle}>1. Washer Status</h1>
+                <h1 style={style.titleStyle}>Washer Status</h1>
                 <WasherCard image = {available} description = {description.available}/>
                 <WasherCard image = {unavailable} description = {description.unavailable}/>
                 <WasherCard image = {base} description = {description.base}/>

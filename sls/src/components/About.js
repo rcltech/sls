@@ -1,16 +1,18 @@
 import React from 'react';
-import Icons from './Icons';
 import 'typeface-roboto';
-import { Collapse, Card, CardBody } from 'reactstrap';
+import {Collapse, Card, CardBody } from 'reactstrap';
+import Members from './Members';
+import ProductDescription from './ProductDescription';
 
-class Help extends React.Component {
+class About extends React.Component {
   render() {
       const {collapse, collapseStyles, textBodyStyles} = this.props;
     return (
         <Collapse isOpen={collapse} style={collapseStyles}>
           <Card>
             <CardBody style={textBodyStyles}>
-              <Icons />
+                <ProductDescription/>
+                <Members/>
             </CardBody>
           </Card>
         </Collapse>
@@ -18,4 +20,4 @@ class Help extends React.Component {
   }
 }
 
-export default Help;
+export default About;
