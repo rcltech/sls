@@ -6,9 +6,9 @@ import base from '../images/base.png';
 
 
 const description = {
-    available : "This means the washing machine is not being used, feel free to pick your laundry bag up and do the business!",
-    unavailable : "Oops, someone is using the washing machine, be patient and always re-visit this website to check the washers' status",
-    base : "This doesn't really mean anything. It tells you that the browser is busy loading the webpage!"
+    available : "This washing machine is not being used, feel free to pick your laundry bag up and go ahead!",
+    unavailable : "Oops, someone is using this washing machine. Be patient, and re-visit this website later.",
+    base : "This doesn't really mean anything. It tells you that the browser is busy loading the webpage."
 }
 
 const style = {
