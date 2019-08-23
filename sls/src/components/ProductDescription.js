@@ -8,7 +8,8 @@ const description = <div><p>The Smart Laundry System aims to help R.C. Lee hall 
 
 const style = {
     container : {
-        width : 'min(80vw,400px)',
+        width: '100%',
+        margin: 'auto',
         marginBottom : '20px'
     },
     titleStyle : {

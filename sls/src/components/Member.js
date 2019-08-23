@@ -4,10 +4,11 @@ const style = {
     container : {
         display : 'grid',
         gridTemplateColumns : '30% 70%',
-        margin : '20px 0',
+        width: '100%',
+        margin : '20px auto',
         padding : '10px',
         border : '0.5px solid #eee',
-        borderRadius : '5px'
+        borderRadius : '5px',
     },
     image : {
         borderRadius : '50%',

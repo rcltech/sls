@@ -10,7 +10,8 @@ import welvin from '../images/team-members/welvin.png';
 
 const style = {
     container : {
-        width : 'min(80vw,400px)'
+        width : '100%',
+        margin: 'auto',
     },
     titleStyle : {
         fontSize : '1.5em'
