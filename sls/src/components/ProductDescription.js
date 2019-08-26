@@ -17,7 +17,7 @@ const style = {
     },
     descriptionStyle : {
         padding : '10px',
-        border : '0.5px solid #eee',
+        border : '1px solid #eee',
         borderRadius : '5px',
         fontSize: '1em',
     }
