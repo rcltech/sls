@@ -12,7 +12,7 @@ class Contact extends React.Component {
             To report any problems with SLS, please{" "}
             <a href="mailto:contact@rctech.club?subject=SLS%20Problem">
               contact us by email
-            </a>
+            </a>.
           </CardBody>
         </Card>
       </Collapse>
