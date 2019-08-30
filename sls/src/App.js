@@ -22,7 +22,9 @@ function App({data}) {
     <div className="App">
       <Container className="App-header">
         <div>
-          <img className="logo" src={logo} alt="RCTECH"/>
+          <a href='http://rctech.club' target='_blank' rel='noopener noreferrer'>
+            <img className="logo" src={logo} alt="RCTECH"/>
+          </a>
         </div>
         <div className="header-text">
           Smart Laundry System
