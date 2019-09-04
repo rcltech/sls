@@ -5,10 +5,15 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
 
 const PORT = 4000;
+const api_key = require('./.keys/api-key.js')
 
 app.post('/', (req, res, next) => {
   console.log(req.body);
-  res.send("post request received");
+  if (req.body.api_key === api_key) {
+    res.send("post request received, api key verified");
+    next();
+  }
+  res.send("unsuccessful connection");
 })
 
 app.listen(PORT, () => {
