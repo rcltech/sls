@@ -1,0 +1,8 @@
+# keys
+.keys
+
+# packages
+node_modules
+
+# zip files for upload to aws
+*.zip
