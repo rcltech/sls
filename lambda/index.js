@@ -7,7 +7,7 @@ exports.handler = async (event) => {
 
     event.body.api_key = ec2_api_key;
 
-    const ec2_url = "http://ec2-3-17-13-87.us-east-2.compute.amazonaws.com:4000"
+    const ec2_url = "http://ec2-52-15-92-86.us-east-2.compute.amazonaws.com:4000"
     const ec2_resp.onse = axios.post(ec2_url, event.body);
 
     const response = {
