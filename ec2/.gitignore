@@ -1,2 +1,5 @@
 # keys
 .keys
+
+# packages
+node_modules/
