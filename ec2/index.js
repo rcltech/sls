@@ -11,7 +11,7 @@ app.post('/', (req, res, next) => {
   console.log(req.body);
   if (req.body.api_key === api_key) {
     res.send("post request received, api key verified");
-    next();
+    return;
   }
   res.send("unsuccessful connection");
 })
