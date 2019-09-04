@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "connect": "ssh -i .keys/sls-ec2-server.pem ec2-user@ec2-3-17-13-87.us-east-2.compute.amazonaws.com",
     "test": "echo \"No tests specified\" && exit 1"
   },
   "author": "",
