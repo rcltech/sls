@@ -1,15 +1,11 @@
 const axios = require('axios');
 
-exports.handler = async (event, context, callback) => {
-    // TODO implement
+exports.handler = async (event) => {
     const firebase_url = "https://us-central1-rcsls-2018.cloudfunctions.net/setWasherStatus"
-    
-    const firebase_response = await axios.post(firebase_url, event.body);
-    
+    const firebase_response = await axios.post(firebase_url, JSON.parse(event.body));
     const response = {
         statusCode: 200,
-        body: JSON.stringify(firebase_response),
+        body: "Sent data to Firebase",
     };
     return response;
 };
-
