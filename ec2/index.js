@@ -13,19 +13,44 @@ const mongodbUrl = 'mongodb://localhost:27017';
 const assert = require('assert');
 const dbName = 'sls-data';
 
-MongoClient.connect(mongodbUrl, function(err, client) {
-  assert.equal(null, err);
-  console.log("Connected successfully to mongo server");
+const insertDocuments = (db, data, callback) => {
+  const collection = db.collection('washerData');
+  collection.insertOne(
+    {
+      dateTime: new Date(),
+      status: data,
+    }, (err, result) => {
+      assert.equal(err, null);
+      assert.equal(1, result.result.n);
+      assert.equal(1, result.ops.length);
+      console.log("Inserted 1 washerData document into the collection");
+      callback(result);
+    }
+  )
+}
 
-  const db = client.db(dbName);
+const sendToMongoDatabase = (data) => {
+  MongoClient.connect(mongodbUrl, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }, (err, client) => {
+    assert.equal(null, err);
+    console.log("Connected successfully to mongo server");
 
-  client.close();
-});
+    const db = client.db(dbName);
+
+    insertDocuments(db, data, () => {
+      client.close();
+    })
+  })
+}
 
 app.post('/', (req, res, next) => {
   console.log(req.body);
   if (req.body.api_key === api_key) {
+    req.body.api_key = null;
     res.status(200).send("EC2 post request received, api key verified");
+    sendToMongoDatabase(req.body);
     return;
   }
   res.status(206).send("EC2 unauthorized access");
