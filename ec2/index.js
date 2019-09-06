@@ -35,7 +35,7 @@ const sendToMongoDatabase = (data) => {
     useUnifiedTopology: true
   }, (err, client) => {
     assert.equal(null, err);
-    console.log("Connected successfully to mongo server");
+    console.log("Connected successfully to mongodb server");
 
     const db = client.db(dbName);
 
