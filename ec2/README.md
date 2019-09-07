@@ -11,6 +11,16 @@ Connect to EC2 instance via ssh.
 
 `npm run connect`
 
-Initiate Nodejs server.
+##### Development Mode
+Initiate Nodejs server using nodemon.
 
 `npm run start`
+
+##### Production Mode
+Initiate and keep Nodejs server using pm2.
+
+`npm run pm2-start`
+
+Stop Nodejs server initiated by pm2.
+
+`npm run pm2-stop`

@@ -4,8 +4,8 @@ const ec2_api_key = require('./.keys/api-key');
 exports.handler = async (event) => {
     const data = JSON.parse(event.body);
 
-    // const firebase_url = "https://us-central1-rcsls-2018.cloudfunctions.net/setWasherStatus"
-    // const firebase_response = await axios.post(firebase_url, data);
+    const firebase_url = "https://us-central1-rcsls-2018.cloudfunctions.net/setWasherStatus"
+    const firebase_response = await axios.post(firebase_url, data);
 
     data.api_key = ec2_api_key;
 
