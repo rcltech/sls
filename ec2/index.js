@@ -11,7 +11,7 @@ const api_key = require('./.keys/api-key.js')
 const MongoClient = require('mongodb').MongoClient;
 const mongodbUrl = 'mongodb://localhost:27017';
 const assert = require('assert');
-const dbName = 'sls-data-test';
+const dbName = 'sls-data';
 
 const insertDocuments = (db, data, callback) => {
   const collection = db.collection('washerData');
