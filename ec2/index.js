@@ -2,12 +2,12 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 const PORT = 4000;
-const private_key = require('./.keys/private-key.js')
 
 const MongoClient = require('mongodb').MongoClient;
 const mongodbUrl = 'mongodb://localhost:27017';
@@ -48,7 +48,7 @@ const sendToMongoDatabase = (data) => {
 
 app.post('/', (req, res, next) => {
   try {
-    var decoded = jwt.verify(req.body.token, private_key, {algorithms:["RS256"]});
+    var decoded = jwt.verify(req.body.token, process.env.EC2_PRIVATE_KEY, {algorithms:["HS256"]});
     console.log(decoded);
     res.status(200).send("EC2 post request received, api key verified");
     // sendToMongoDatabase(req.body);
