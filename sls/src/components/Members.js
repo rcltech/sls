@@ -2,7 +2,7 @@ import React from 'react';
 import Member from './Member';
 import {map} from 'lodash';
 import gela from '../images/team-members/gela.png';
-import sean from '../images/team-members/sean.png';
+import sean from '../images/team-members/sean.jpg';
 import sid from '../images/team-members/sid.png';
 import utkarsh from '../images/team-members/utkarsh.png';
 import waqas from '../images/team-members/waqas.png';
