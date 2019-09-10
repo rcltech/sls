@@ -1,5 +1,5 @@
-# keys
-.keys
+# dotenv
+.env
 
 # packages
 node_modules
