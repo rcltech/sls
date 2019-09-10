@@ -51,13 +51,12 @@ const sendToMongoDatabase = (data) => {
 app.post('/', (req, res, next) => {
   try {
     const decoded = jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
-    console.log(decoded);
-    res.status(200).send("EC2 post request received, api key verified");
+    res.status(200).send("EC2 post request received.");
     sendToMongoDatabase(decoded);
     return;
   } catch (err) {
     console.error(err);
-    res.status(206).send("EC2 unauthorized access");
+    res.status(206).send("EC2 unauthorized access.");
   }
 })
 
