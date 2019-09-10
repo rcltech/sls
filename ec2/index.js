@@ -50,10 +50,10 @@ const sendToMongoDatabase = (data) => {
 
 app.post('/', (req, res, next) => {
   try {
-    var decoded = jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
+    const decoded = await jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
     console.log(decoded);
     res.status(200).send("EC2 post request received, api key verified");
-    // sendToMongoDatabase(req.body);
+    sendToMongoDatabase(decoded);
     return;
   } catch (err) {
     console.error(err);
@@ -62,5 +62,5 @@ app.post('/', (req, res, next) => {
 })
 
 app.listen(PORT, () => {
-  console.log("SLS EC2 server running on port 4000...");
+  console.log("SLS EC2 server running on port " + PORT);
 })
