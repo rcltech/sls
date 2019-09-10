@@ -1,17 +1,19 @@
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var jwt = require('jsonwebtoken');
-require('dotenv').config();
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const assert = require('assert');
+const env = require('dotenv');
+env.config();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-const PORT = 4000;
+const PORT = process.env.PORT;
+const private_key = process.env.EC2_PRIVATE_KEY;
 
 const MongoClient = require('mongodb').MongoClient;
-const mongodbUrl = 'mongodb://localhost:27017';
-const assert = require('assert');
+const mongodbUrl = process.env.MONGO_URL;
 const dbName = 'sls-data';
 
 const insertDocuments = (db, data, callback) => {
@@ -20,12 +22,12 @@ const insertDocuments = (db, data, callback) => {
     {
       dateTime: new Date(),
       status: data,
-    }, (err, result) => {
+    }, (err, res) => {
       assert.equal(err, null);
-      assert.equal(1, result.result.n);
-      assert.equal(1, result.ops.length);
+      assert.equal(1, res.result.n);
+      assert.equal(1, res.ops.length);
       console.log("Inserted 1 washerData document into the collection");
-      callback(result);
+      callback(res);
     }
   )
 }
@@ -48,7 +50,7 @@ const sendToMongoDatabase = (data) => {
 
 app.post('/', (req, res, next) => {
   try {
-    var decoded = jwt.verify(req.body.token, process.env.EC2_PRIVATE_KEY, {algorithms:["HS256"]});
+    var decoded = jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
     console.log(decoded);
     res.status(200).send("EC2 post request received, api key verified");
     // sendToMongoDatabase(req.body);
