@@ -50,7 +50,7 @@ const sendToMongoDatabase = (data) => {
 
 app.post('/', (req, res, next) => {
   try {
-    const decoded = await jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
+    const decoded = jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
     console.log(decoded);
     res.status(200).send("EC2 post request received, api key verified");
     sendToMongoDatabase(decoded);
