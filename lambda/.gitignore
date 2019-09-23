@@ -1,0 +1,8 @@
+# dotenv
+.env
+
+# packages
+node_modules
+
+# zip files for upload to aws
+*.zip
