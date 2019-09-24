@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "connect": "ssh -i .keys/sls-ec2-server.pem ec2-user@ec2-52-15-92-86.us-east-2.compute.amazonaws.com",
-    "upload": "scp -i ./.keys/sls-ec2-server.pem -r ./ ec2-user@ec2-52-15-92-86.us-east-2.compute.amazonaws.com:~/ec2",
+    "connect": "./scripts.sh connect",
+    "upload": "./scripts.sh upload",
     "pm2-start": "pm2 start index.js",
     "pm2-stop": "pm2 stop index.js",
     "test": "echo \"No tests specified\" && exit 1"
