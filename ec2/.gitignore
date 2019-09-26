@@ -6,3 +6,6 @@
 
 # packages
 node_modules/
+
+# scripts
+*.sh
