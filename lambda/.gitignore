@@ -2,7 +2,7 @@
 .env
 
 # packages
-node_modules
+node_modules/
 
 # zip files for upload to aws
 *.zip
