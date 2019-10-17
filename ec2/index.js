@@ -50,8 +50,8 @@ const insertDocuments = async (data) => {
 
 const getDocuments = async (data) => {
   const collection = db.collection('washerData');
-  const size = parseInt(data.size, 10);
-  const results = await collection.find({}, {limit: 100}).toArray();
+  const size = data.size;
+  const results = await collection.find({}, {limit: 1000}).toArray();
   const downsizedResults = results.length > size ? results.slice(-1 * size) : results;
   return downsizedResults;
 }
@@ -69,7 +69,7 @@ app.post('/', (req, res, next) => {
 
 app.get('/', async (req, res, next) => {
   try {
-    const size = req.body.size || 100;
+    const size = parseInt(req.body.size, 10) || 1000;
     const data = await getDocuments({size});
     if (data && data.length === 0) {
       return res.status(500).send("No data found.")
