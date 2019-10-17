@@ -16,8 +16,25 @@ const private_key = process.env.EC2_PRIVATE_KEY;
 const MongoClient = require('mongodb').MongoClient;
 const mongodbUrl = process.env.MONGO_URL;
 const dbName = 'sls-data';
+let db;
 
-const insertDocuments = async (db, data) => {
+// Initialize connection once
+MongoClient.connect(mongodbUrl,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }, (err, client) => {
+  if(err) console.error(err);
+
+  db = client.db(dbName);
+
+  // Start the application after the database connection is ready
+  app.listen(PORT, () => {
+    console.log("SLS EC2 server running on port " + PORT);
+  })
+});
+
+const insertDocuments = async (data) => {
   const collection = db.collection('washerData');
   await collection.insertOne(
     {
@@ -32,7 +49,7 @@ const insertDocuments = async (db, data) => {
   )
 }
 
-const getDocuments = async (db, data) => {
+const getDocuments = async (data) => {
   const collection = db.collection('washerData');
   const size = parseInt(data.size, 10);
   const results = await collection.find({}, {limit: 100}).toArray();
@@ -40,27 +57,11 @@ const getDocuments = async (db, data) => {
   return downsizedResults;
 }
 
-const sendToMongoDatabase = (data, callback) => {
-  try {
-    const client = new MongoClient(mongodbUrl,
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      }
-    );
-    console.log("Connected successfully to mongodb server");
-    const db = client.db(dbName);
-    return callback(db, data);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 app.post('/', (req, res, next) => {
   try {
     const decoded = jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
     res.status(200).send("EC2 post request received.");
-    sendToMongoDatabase(decoded, insertDocuments);
+    insertDocuments(decoded);
   } catch (err) {
     console.error(err);
     res.status(206).send("EC2 unauthorized access.");
@@ -70,7 +71,7 @@ app.post('/', (req, res, next) => {
 app.get('/', async (req, res, next) => {
   try {
     const size = req.body.size || 100;
-    const data = await sendToMongoDatabase({size}, getDocuments);
+    const data = await getDocuments({size});
     if (data && data.length === 0) {
       return res.status(500).send("No data found.")
     }
@@ -79,8 +80,4 @@ app.get('/', async (req, res, next) => {
     console.error(err);
     res.status(500).send("EC2 internal error.")
   }
-})
-
-app.listen(PORT, () => {
-  console.log("SLS EC2 server running on port " + PORT);
 })
