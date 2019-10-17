@@ -42,7 +42,7 @@ const getDocuments = async (db, data) => {
 
 const sendToMongoDatabase = (data, callback) => {
   try {
-    const client = MongoClient.connect(mongodbUrl,
+    const client = new MongoClient(mongodbUrl,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true
