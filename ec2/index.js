@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const assert = require('assert');
+const cloneDeep = require('lodash.clonedeep');
 const env = require('dotenv');
 env.config();
 
@@ -16,9 +17,9 @@ const MongoClient = require('mongodb').MongoClient;
 const mongodbUrl = process.env.MONGO_URL;
 const dbName = 'sls-data';
 
-const insertDocuments = (db, data, callback) => {
+const insertDocuments = async (db, data) => {
   const collection = db.collection('washerData');
-  collection.insertOne(
+  await collection.insertOne(
     {
       dateTime: new Date(),
       status: data,
@@ -27,36 +28,54 @@ const insertDocuments = (db, data, callback) => {
       assert.equal(1, res.result.n);
       assert.equal(1, res.ops.length);
       console.log("Inserted 1 washerData document into the collection");
-      callback(res);
     }
   )
 }
 
-const sendToMongoDatabase = (data) => {
+const getDocuments = async (db, data) => {
+  const collection = db.collection('washerData');
+  const size = parseInt(data.size, 10);
+  const results = await collection.find({}, {limit: 100}).toArray();
+  const downsizedResults = results.length > size ? results.slice(-1 * size) : results;
+  return downsizedResults;
+}
+
+const sendToMongoDatabase = (data, callback) => {
+  let results;
   MongoClient.connect(mongodbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  }, (err, client) => {
+  }, async (err, client) => {
     assert.equal(null, err);
     console.log("Connected successfully to mongodb server");
-
     const db = client.db(dbName);
-
-    insertDocuments(db, data, () => {
-      client.close();
-    })
+    results = cloneDeep(await callback(db, data));
   })
+  return results;
 }
 
 app.post('/', (req, res, next) => {
   try {
     const decoded = jwt.verify(req.body.token, private_key, {algorithms:["HS256"]});
     res.status(200).send("EC2 post request received.");
-    sendToMongoDatabase(decoded);
-    return;
+    sendToMongoDatabase(decoded, insertDocuments);
   } catch (err) {
     console.error(err);
     res.status(206).send("EC2 unauthorized access.");
+  }
+})
+
+app.get('/', async (req, res, next) => {
+  try {
+    const size = req.body.size || 100;
+    const data = await sendToMongoDatabase({size}, getDocuments);
+    if (data && data.length === 0) {
+      return res.status(500).send("No data found.")
+    }
+    res.status(200).json({ data });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("EC2 internal error.")
   }
 })
 
