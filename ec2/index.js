@@ -41,17 +41,19 @@ const getDocuments = async (db, data) => {
 }
 
 const sendToMongoDatabase = (data, callback) => {
-  let results;
-  MongoClient.connect(mongodbUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }, async (err, client) => {
-    assert.equal(null, err);
+  try {
+    const client = MongoClient.connect(mongodbUrl,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+      }
+    );
     console.log("Connected successfully to mongodb server");
     const db = client.db(dbName);
-    results = cloneDeep(await callback(db, data));
-  })
-  return results;
+    return callback(db, data);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 app.post('/', (req, res, next) => {
