@@ -3,7 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const assert = require('assert');
-const cloneDeep = require('lodash.clonedeep');
 const env = require('dotenv');
 env.config();
 
