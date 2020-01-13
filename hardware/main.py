@@ -10,6 +10,7 @@ from machine import Pin
 import utime
 from utime import time
 from utime import sleep
+import gc
 
 washer_data = {
     "washer1": 0,
@@ -130,6 +131,7 @@ def main():
     connect_open_wifi()
     while(True):
         updateWasherStatus()
-        sleep(10)
+        gc.collect()
+        sleep(1)
 
 main()
