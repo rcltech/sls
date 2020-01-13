@@ -100,6 +100,7 @@ def send_data():
     try:
         res = urequests.post(aws_url,json=washer_data,  headers=headers)
         print(res.text)
+        res.close()
     except:
         print("There was an exception, trying again")
         connect_open_wifi()
