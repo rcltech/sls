@@ -10,10 +10,16 @@ from machine import Pin
 from utime import sleep
 import gc
 
-p0 = Pin(0, Pin.IN).value(0)
-p1 = Pin(14, Pin.IN).value(0)
-p2 = Pin(4, Pin.IN).value(0)
-p3 = Pin(5, Pin.IN).value(0)
+p0 = Pin(0, Pin.IN)
+p1 = Pin(14, Pin.IN)
+p2 = Pin(4, Pin.IN)
+p3 = Pin(5, Pin.IN)
+
+p0.value(0)
+p1.value(0)
+p2.value(0)
+p3.value(0)
+
 
 washer_data = {
     "washer1": 0,
