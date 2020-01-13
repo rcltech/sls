@@ -7,20 +7,8 @@ import urequests
 import ujson
 from machine import ADC
 from machine import Pin
-import utime
-from utime import time
 from utime import sleep
 import gc
-
-washer_data = {
-    "washer1": 0,
-    "washer2": 0,
-    "washer3": 0,
-    "washer4": 0
-}
-
-f = open('API_KEY.txt')
-API_KEY = f.read()
 
 p0 = Pin(0, Pin.IN)
 p1 = Pin(14, Pin.IN)
@@ -31,6 +19,20 @@ p0.value(0)
 p1.value(0)
 p2.value(0)
 p3.value(0)
+
+
+washer_data = {
+    "washer1": 0,
+    "washer2": 0,
+    "washer3": 0,
+    "washer4": 0
+}
+
+def read_api_key():
+    with open("API_KEY.txt") as f:
+        api_key = f.read()
+        f.close()
+        return api_key
 
 def do_connect():
     sta_if = network.WLAN(network.STA_IF)
@@ -46,32 +48,25 @@ def do_connect():
             pass
     print("connected")
 
-
-def getMagic():
+def get_magic():
+    # This little mod handles the redirect issue in the urequests
     import urequests_mod
-
     r = urequests_mod.get('http://msftconnect.com')
-
     #This is the position where the redirect URL starts. It will be required to initiate the authentication
     url_start = r.text.find('http://')
-
     #This gives us the position of the magic URL
-    magic_start=r.text.find('fgtauth') + 8
-    magic_end=magic_start + 16
-    magic=r.text[magic_start:magic_end]
-
+    magic_start_index = r.text.find('fgtauth') + 8
+    magic = r.text[magic_start_index : magic_start_index + 16]
     #The extracted URL
-    url = r.text[url_start: magic_end]
-
+    url = r.text[url_start : magic_start_index + 16]
     r.close()
     return url, magic
-
 
 """
     Using the redirect URL and magic value, this function will initiate authentication
     and then complete the authentication, thus connecting to the internet.
 """
-def connectWithMagic(url, magic):
+def connect_with_magic(url, magic):
     st = "4Tredir=http%3A%2F%2Fmsftconnect.com%2F&magic="+str(magic)+"&username=wifi&password=wifi"
     try:
         #Initiate the authentication by sending GET request to the redirected URL
@@ -89,16 +84,13 @@ def connectWithMagic(url, magic):
     except ValueError:
         print("The device was already logged in. Therefore, there was no URL")
 
-
-
 def connect_open_wifi():
     do_connect()
-    url, magic = getMagic()
-    connectWithMagic(url, magic)
+    url, magic = get_magic()
+    connect_with_magic(url, magic)
 
-def sendData():
-    global API_KEY
-    global washer_data
+def send_data():
+    API_KEY = read_api_key()
     aws_url = 'https://m3q6ssas8g.execute-api.us-east-2.amazonaws.com/default/sls'
     headers = {
         'Accept': 'application/json',
@@ -106,18 +98,15 @@ def sendData():
         'x-api-key': API_KEY
     }
     try:
-        print(washer_data)
         res = urequests.post(aws_url,json=washer_data,  headers=headers)
         print(res.text)
+        res.close()
     except:
         print("There was an exception, trying again")
         connect_open_wifi()
-        sendData()
+        send_data()
 
-last_val_change = utime.ticks_ms()
-
-def updateWasherStatus():
-    global last_val_change
+def update_washer_status():
     old_washer_data = washer_data.copy()
     washer_data["washer1"] = p0.value()
     washer_data["washer2"] = p1.value()
@@ -125,13 +114,16 @@ def updateWasherStatus():
     washer_data["washer4"] = p3.value()
     if old_washer_data == washer_data:
         return
-    sendData()
+    print(washer_data)
+    send_data()
 
 def main():     
     connect_open_wifi()
     while(True):
-        updateWasherStatus()
+        update_washer_status()
         gc.collect()
         sleep(1)
 
+gc.collect()
 main()
+gc.collect()
