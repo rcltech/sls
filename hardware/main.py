@@ -20,7 +20,6 @@ p1.value(0)
 p2.value(0)
 p3.value(0)
 
-
 washer_data = {
     "washer1": 0,
     "washer2": 0,
