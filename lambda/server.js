@@ -13,11 +13,17 @@ const PORT = 4400;
 
 app.post('/', async (req, res) => {
   const testUrl = 'http://localhost:4000/graphql'; // phoenix development server
+  const secret = process.env.PHOENIX_DEV_SECRET;
 
   const { data } = req.body;
   // data = { washer1: 0, washer2: 0, washer3: 0, washer4: 0}
 
-  await routeToPhoenix(data, testUrl);
+  try {
+    await routeToPhoenix(data, testUrl, secret);
+  } catch (e) {
+    console.log(e);
+    return res.status(500).send('internal server error');
+  }
   return res.status(200).send('successful');
 });
 
