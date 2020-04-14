@@ -3,3 +3,4 @@ API_KEY.txt
 .idea
 .env
 *.lock
+node_modules
