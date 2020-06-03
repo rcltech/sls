@@ -1,6 +1,6 @@
-# Lambda Function for Firebase
+# Lambda Function
 
-This function will send a request to Firebase on behalf of the ESP8266. Required because ESP8266 is incapable of handling SSL.
+This function will send a request to Phoenix on behalf of the ESP8266. This is required because ESP8266 is incapable of handling SSL, and its probably a better idea to send graphql requests within a nodejs runtime.
 
 #### To Develop
 
