@@ -1,0 +1,25 @@
+{
+  "name": "sls",
+  "version": "1.0.0",
+  "description": "smart laundry system for rc lee hall",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rcltech/sls.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rcltech/sls/issues"
+  },
+  "homepage": "https://github.com/rcltech/sls#readme",
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.4",
+    "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  }
+}

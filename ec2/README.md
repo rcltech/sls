@@ -1,6 +1,9 @@
 # AWS EC2 Instance for Nodejs Server with MongoDB
 To store washer data for possible machine learning purposes
 
+# Deprecation Notice
+The ec2 server instance has been terminated.
+
 #### Important note
 If you want to connect to the server, you need a `.pem` key. So far, only Sean has it.
 
