@@ -9,16 +9,16 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: aws
+        working-directory: sls
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Install and Build
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
           npm install
           npm run build
       - name: Deploy
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: npm run deploy
