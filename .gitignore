@@ -4,3 +4,4 @@ API_KEY.txt
 .env
 *.lock
 node_modules
+.DS_Store
